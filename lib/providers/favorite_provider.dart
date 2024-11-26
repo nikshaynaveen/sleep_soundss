@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 
 class FavoriteProvider extends ChangeNotifier {
-  // This map will store the favorite status for each item by title
-  final Map<String, bool> _favorites = {};
+  final Set<String> _favoriteTitles = {}; // Store item titles as favorites
 
-  // Method to check if an item is favorited
   bool isFavorite(String title) {
-    return _favorites[title] ?? false;
+    return _favoriteTitles.contains(title);
   }
 
-  // Method to toggle the favorite status
   void toggleFavorite(String title) {
-    // Toggle the favorite status of the item
-    _favorites[title] = !(_favorites[title] ?? false);
-
-    // Notify listeners so that UI updates accordingly
-    notifyListeners();
+    if (_favoriteTitles.contains(title)) {
+      _favoriteTitles.remove(title);
+    } else {
+      _favoriteTitles.add(title);
+    }
+    notifyListeners(); // Notify listeners to rebuild the UI
   }
 }

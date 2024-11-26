@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Profile extends StatelessWidget {
-  const Profile({super.key});
+class Composer extends StatelessWidget {
+  const Composer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +11,10 @@ class Profile extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: const Color(0xff141927),
         title: const Text(
-          'Profile',
+          'Composer',
           style: TextStyle(
-            fontFamily: 'Nunito',
-            fontSize: 24,
+            fontFamily: 'SF',
+            fontSize: 28,
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
@@ -22,11 +22,11 @@ class Profile extends StatelessWidget {
       ),
       body: const Center(
         child: Text(
-          'Profile Content Goes Here',
+          'Composer Content Goes Here',
           style: TextStyle(
             fontSize: 18,
             color: Colors.white,
-            fontFamily: 'Nunito',
+            fontFamily: 'SF',
           ),
         ),
       ),

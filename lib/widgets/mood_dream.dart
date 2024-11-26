@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MoodRow extends StatelessWidget {
-  final Widget icon; // Change from IconData to Widget
+class MoodDream extends StatelessWidget {
+  final Widget icon;
   final String title;
   final String subtitle;
 
-  const MoodRow({
+  const MoodDream({
     super.key,
     required this.icon,
     required this.title,
@@ -16,14 +16,14 @@ class MoodRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        icon, // Use the custom icon directly
+        icon,
         const SizedBox(height: 6),
         Text(
           title,
           style: const TextStyle(
             color: Colors.white,
             fontSize: 20,
-            fontFamily: 'Nunito',
+            fontFamily: 'SF',
           ),
         ),
         const SizedBox(height: 4),
@@ -32,7 +32,7 @@ class MoodRow extends StatelessWidget {
           style: const TextStyle(
             color: Colors.white,
             fontSize: 24,
-            fontFamily: 'Nunito',
+            fontFamily: 'SF',
             fontWeight: FontWeight.bold,
           ),
         ),

@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:sleep_sounds/widgets/playfavbutton.dart';
+import 'package:sleep_sounds/widgets/play_fav_button.dart';
 
 class BottomContainer extends StatelessWidget {
   final String title;
   final String subtitle;
-  final bool isFavorite;
-  final Function onFavoriteToggle;
+  final bool isFavorite; // <-- Add this
+  final VoidCallback onFavoriteToggle; // <-- Add this
 
   const BottomContainer({
     super.key,
     required this.title,
     required this.subtitle,
-    required this.isFavorite,
-    required this.onFavoriteToggle,
+    required this.isFavorite, // <-- Add this
+    required this.onFavoriteToggle, // <-- Add this
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
       decoration: const BoxDecoration(
         color: Color(0xff141927),
         borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
@@ -28,10 +28,10 @@ class BottomContainer extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Divider(
-            thickness: 2,
+            thickness: 4,
             color: Color(0xff2D344B),
-            endIndent: 155,
-            indent: 155,
+            endIndent: 165,
+            indent: 165,
           ),
           // Title and Subtitle
           Text(
@@ -40,7 +40,7 @@ class BottomContainer extends StatelessWidget {
               color: Colors.white,
               fontSize: 34,
               fontWeight: FontWeight.bold,
-              fontFamily: 'Nunito',
+              fontFamily: 'SF',
             ),
           ),
           const SizedBox(height: 4),
@@ -49,17 +49,20 @@ class BottomContainer extends StatelessWidget {
             style: const TextStyle(
               color: Colors.white70,
               fontSize: 18,
-              fontFamily: 'Nunito',
+              fontFamily: 'SF',
             ),
           ),
-          const SizedBox(height: 28),
+          const SizedBox(height: 20),
           const Divider(color: Color(0xff21283f)),
           const SizedBox(height: 2),
+
+          // Play and Favorite Button
           PlayFavButton(
-              isFavorite: isFavorite, onFavoriteToggle: onFavoriteToggle),
+            isFavorite: isFavorite,
+            onFavoriteToggle: onFavoriteToggle,
+          ),
 
           const SizedBox(height: 2),
-          const Divider(color: Color(0xff21283f)),
         ],
       ),
     );

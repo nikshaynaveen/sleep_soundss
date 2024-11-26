@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  just_audio: ^0.9.42
   provider: ^6.1.2
 
 dev_dependencies:
@@ -33,3 +34,7 @@ flutter:
           weight: 300
         - asset: assets/fonts/Nunito-Black.ttf
           weight: 900
+
+    - family: SF
+      fonts:
+        - asset: assets/fonts/SF-Pro-Rounded-Regular.otf
