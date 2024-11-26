@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sleep_sounds/screens/music.dart';
-import 'package:sleep_sounds/screens/profile.dart';
+import 'package:sleep_sounds/screens/composer.dart';
+import 'package:sleep_sounds/screens/profile_login.dart';
 import 'package:sleep_sounds/screens/sleep.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,8 +15,8 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     const Sleep(),
-    const Music(),
-    const Profile(),
+    const ComposerScreen(),
+    const ProfileScreen(),
   ];
 
   final List<String> _iconPaths = [
