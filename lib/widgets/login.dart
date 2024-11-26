@@ -23,7 +23,7 @@ class Login_Widget extends StatelessWidget {
           style: const TextStyle(
             color: Colors.white,
             fontSize: 20,
-            fontFamily: 'Nunito',
+            fontFamily: 'SF',
           ),
         ),
         const SizedBox(height: 4),
@@ -32,7 +32,7 @@ class Login_Widget extends StatelessWidget {
           style: const TextStyle(
             color: Colors.white,
             fontSize: 24,
-            fontFamily: 'Nunito',
+            fontFamily: 'SF',
             fontWeight: FontWeight.bold,
           ),
         ),

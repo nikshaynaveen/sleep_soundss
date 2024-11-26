@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ComposerScreen extends StatelessWidget {
-  const ComposerScreen({super.key});
+class Composer extends StatelessWidget {
+  const Composer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class ComposerScreen extends StatelessWidget {
                     color: Colors.white,
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'Nunito',
+                    fontFamily: 'SF',
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -126,7 +126,7 @@ class _SectionWidgetState extends State<SectionWidget> {
               color: Colors.white,
               fontSize: 22,
               fontWeight: FontWeight.w500,
-              fontFamily: 'Nunito',
+              fontFamily: 'SF',
             ),
           ),
           const SizedBox(height: 5),
@@ -142,7 +142,7 @@ class _SectionWidgetState extends State<SectionWidget> {
               style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 16,
-                fontFamily: 'Nunito',
+                fontFamily: 'SF',
               ),
             ),
           ),

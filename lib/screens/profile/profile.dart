@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sleep_sounds/screens/favorite.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class Profile extends StatefulWidget {
+  const Profile({super.key});
 
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  _ProfileState createState() => _ProfileState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileState extends State<Profile> {
   bool isLoggedIn = true; // Manages the login state
 
   @override
@@ -27,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.white,
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'Nunito',
+                  fontFamily: 'SF',
                 ),
               ),
               const SizedBox(height: 20),

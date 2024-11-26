@@ -1,45 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:sleep_sounds/widgets/custom_button.dart';
+import 'package:sleep_sounds/widgets/icon_text_button.dart';
 
 class PlayFavButton extends StatelessWidget {
   final bool isFavorite;
-  final Function onFavoriteToggle;
-  const PlayFavButton(
-      {super.key, required this.isFavorite, required this.onFavoriteToggle});
+  final VoidCallback onFavoriteToggle;
+
+  const PlayFavButton({
+    super.key,
+    required this.isFavorite,
+    required this.onFavoriteToggle,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return // Play and Favorite Buttons
-        Row(
+    // Play and Favorite button
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        CustomButton(
+        IconTextButton(
           icon: Icons.play_arrow,
-          // iconcolor: Colors.white,
           label: 'Play',
-          color: const Color(0xff4870ff), // Darker background
-          onPressed: () {},
+          color: const Color(0xff4870ff),
+          onPressed: () {
+            // Implement the Play functionality here
+          },
           textStyle: const TextStyle(
             color: Colors.white,
-            fontFamily: 'Nunito',
-            fontSize: 16,
+            fontFamily: 'SF',
+            fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
-
         // Favorite Button
-        CustomButton(
+        IconTextButton(
           iconcolor: isFavorite ? Colors.orange : Colors.white,
-          icon: isFavorite ? Icons.star_half : Icons.star,
+          icon: isFavorite ? Icons.star : Icons.star_border,
           label: isFavorite ? 'Unfavorite' : 'Favorite',
-          color: const Color(0xff21283f), // Darker background
+          color: const Color(0xff21283f),
           onPressed: () {
+            // Toggle the favorite state
             onFavoriteToggle();
           },
           textStyle: TextStyle(
             color: isFavorite ? Colors.orange : Colors.white,
-            fontFamily: 'Nunito',
-            fontSize: 16,
+            fontFamily: 'SF',
+            fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),

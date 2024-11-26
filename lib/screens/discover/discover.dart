@@ -1,34 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sleep_sounds/widgets/category_tab.dart';
-import 'package:sleep_sounds/widgets/music_grid.dart'; // Import the new widget
+import 'package:sleep_sounds/providers/category_provider.dart';
+import 'package:sleep_sounds/widgets/test_grid_pack.dart';
 
-class Sleep extends StatefulWidget {
-  const Sleep({super.key});
-
-  @override
-  _SleepState createState() => _SleepState();
-}
-
-class _SleepState extends State<Sleep> {
-  String _selectedCategory = 'All';
-
-  void _onCategorySelected(String category) {
-    setState(() {
-      _selectedCategory = category;
-    });
-  }
+class Discover extends StatelessWidget {
+  const Discover({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final categoryProvider = Provider.of<CategoryProvider>(context);
+
     return Scaffold(
       backgroundColor: const Color(0xff141927),
       appBar: AppBar(
         backgroundColor: const Color(0xff141927),
         title: const Text(
-          'Sleep',
+          'Discover',
           style: TextStyle(
-            fontFamily: 'Nunito',
-            fontSize: 24,
+            fontFamily: 'SF',
+            fontSize: 30,
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
@@ -42,13 +33,17 @@ class _SleepState extends State<Sleep> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: CategoryTabs(
-              onCategorySelected: _onCategorySelected,
+              onCategorySelected: (category) =>
+                  categoryProvider.setCategory(category),
             ),
+          ),
+          const SizedBox(
+            height: 8,
           ),
           // MusicGrid
           Expanded(
-            child: MusicGrid(
-              selectedCategory: _selectedCategory,
+            child: TestGridPack(
+              selectedCategory: categoryProvider.selectedCategory,
             ),
           ),
         ],

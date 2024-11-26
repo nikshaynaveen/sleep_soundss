@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomButton extends StatelessWidget {
+class IconTextButton extends StatelessWidget {
   final IconData icon;
   final String label;
   final Color color;
@@ -8,7 +8,7 @@ class CustomButton extends StatelessWidget {
   final TextStyle? textStyle;
   final Color? iconcolor;
 
-  const CustomButton(
+  const IconTextButton(
       {super.key,
       required this.icon,
       required this.label,
@@ -29,7 +29,7 @@ class CustomButton extends StatelessWidget {
           style: textStyle ??
               const TextStyle(
                 color: Colors.white,
-                fontFamily: 'Nunito',
+                fontFamily: 'SF',
               ),
         ),
         style: ElevatedButton.styleFrom(
