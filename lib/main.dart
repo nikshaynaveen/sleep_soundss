@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sleep_sounds/providers/bottom_container_provider.dart';
-import 'package:sleep_sounds/providers/category_provider.dart';
-import 'package:sleep_sounds/providers/launch_provider.dart';
-import 'package:sleep_sounds/providers/navigation_provider.dart';
-import 'package:sleep_sounds/screens/launch/launch.dart';
-import 'package:sleep_sounds/screens/launch/login_slides.dart';
-import 'package:sleep_sounds/screens/discover/discover.dart';
-import 'package:sleep_sounds/providers/auth_provider.dart';
-import 'package:sleep_sounds/providers/favorite_provider.dart';
+import 'package:sleep_sounds/screens/feature/discover/provider/bottom_container_provider.dart';
+import 'package:sleep_sounds/screens/feature/discover/provider/category_provider.dart';
+import 'package:sleep_sounds/screens/feature/launch/provider/launch_provider.dart';
+import 'package:sleep_sounds/screens/feature/discover/provider/navigation_provider.dart';
+import 'package:sleep_sounds/screens/feature/launch/view/launch.dart';
+import 'package:sleep_sounds/screens/feature/launch/view/login_slides.dart';
+import 'package:sleep_sounds/screens/feature/discover/view/discover.dart';
+import 'package:sleep_sounds/screens/feature/launch/provider/auth_provider.dart';
+import 'package:sleep_sounds/screens/feature/discover/provider/favorite_provider.dart';
 
 void main() {
   runApp(
