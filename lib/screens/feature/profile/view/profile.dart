@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sleep_sounds/screens/feature/favorite/favorite.dart';
+import 'package:sleep_sounds/screens/feature/profile/provider/profile_provider.dart';
 
-class Profile extends StatefulWidget {
+class Profile extends StatelessWidget {
   const Profile({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _ProfileState createState() => _ProfileState();
-}
-
-class _ProfileState extends State<Profile> {
-  bool isLoggedIn = true; // Manages the login state
-
-  @override
   Widget build(BuildContext context) {
+    final profileProvider = Provider.of<ProfileProvider>(context);
+
     return Scaffold(
       backgroundColor: const Color(0xff141927),
       body: SafeArea(
@@ -31,9 +28,9 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               const SizedBox(height: 20),
-              _buildAuthorizationSection(),
+              _buildAuthorizationSection(context, profileProvider),
               const SizedBox(height: 20),
-              _buildOptionsSection(),
+              _buildOptionsSection(context, profileProvider),
             ],
           ),
         ),
@@ -41,91 +38,84 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _buildAuthorizationSection() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: const Color(0xff2D344B),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        children: [
-          Image.asset(
-            isLoggedIn ? 'assets/icons/logout.png' : 'assets/icons/login.png',
-            height: 60,
-            width: 60,
-          ),
-          const SizedBox(height: 10),
-          Text(
-            isLoggedIn ? 'First name Last name' : 'Authorization',
-            style: const TextStyle(
-              fontFamily: 'SF',
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+  Widget _buildAuthorizationSection(
+      BuildContext context, ProfileProvider profileProvider) {
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: const Color(0xff2D344B),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          children: [
+            Image.asset(
+              profileProvider.isLoggedIn
+                  ? 'assets/icons/logout.png'
+                  : 'assets/icons/login.png',
+              height: 60,
+              width: 60,
             ),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            isLoggedIn
-                ? 'Log in with Apple ID \n  email@gmail.com'
-                : 'In order to access the library of favorite packs of sounds,Log in with Apple ID',
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 14,
-              color: Colors.grey,
-              fontFamily: 'SF',
-            ),
-          ),
-          const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {
-              if (isLoggedIn) {
-                _showLogoutBottomSheet();
-              } else {
-                setState(() {
-                  isLoggedIn = true; // Login action
-                });
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xff2D344B),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25),
+            const SizedBox(height: 10),
+            Text(
+              profileProvider.isLoggedIn
+                  ? 'First name Last name'
+                  : 'Authorization',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
-              minimumSize: const Size(300, 50),
             ),
-            child: isLoggedIn
-                ? const Text(
-                    'Logout',
-                    style: TextStyle(
-                      color: Colors.orange,
-                      fontSize: 18,
-                      fontFamily: 'SF',
-                    ),
-                  )
-                : const Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.apple, color: Colors.white),
-                      SizedBox(width: 8),
-                      Text(
-                        'Login with Apple ID',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                          fontFamily: 'SF',
+            const SizedBox(height: 5),
+            Text(
+              profileProvider.isLoggedIn
+                  ? 'Log in with Apple ID \n email@gmail.com'
+                  : 'In order to access the library of favorite packs of sounds, log in with Apple ID',
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                if (profileProvider.isLoggedIn) {
+                  _showLogoutBottomSheet(context, profileProvider);
+                } else {
+                  profileProvider.toggleLoginStatus();
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xff2D344B),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                minimumSize: const Size(300, 50),
+              ),
+              child: profileProvider.isLoggedIn
+                  ? const Text(
+                      'Logout',
+                      style: TextStyle(color: Colors.orange, fontSize: 18),
+                    )
+                  : const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.apple, color: Colors.white),
+                        SizedBox(width: 8),
+                        Text(
+                          'Login with Apple ID',
+                          style: TextStyle(color: Colors.white, fontSize: 17),
                         ),
-                      ),
-                    ],
-                  ),
-          ),
-        ],
+                      ],
+                    ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildOptionsSection() {
+  Widget _buildOptionsSection(
+      BuildContext context, ProfileProvider profileProvider) {
     return Expanded(
       child: ListView(
         children: [
@@ -135,19 +125,18 @@ class _ProfileState extends State<Profile> {
             Colors.orange,
             trailingColor: Colors.orange,
           ),
-          if (isLoggedIn)
+          if (profileProvider.isLoggedIn)
             _buildListTile(
               'assets/icons/favorite.png',
               'Favorite',
               Colors.white,
               onTap: () {
-                // Navigate to the Favorite Screen
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => const favoriteScreen(),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FavoriteScreen(),
+                  ),
+                );
               },
             ),
           _buildListTile(
@@ -184,7 +173,7 @@ class _ProfileState extends State<Profile> {
   }) {
     return ListTile(
       leading: CircleAvatar(
-        backgroundColor: const Color.fromARGB(0, 94, 70, 70),
+        backgroundColor: Colors.transparent,
         child: Image.asset(imagePath, fit: BoxFit.contain),
       ),
       title: Text(
@@ -197,18 +186,16 @@ class _ProfileState extends State<Profile> {
       ),
       trailing:
           Icon(Icons.arrow_forward_ios, color: trailingColor ?? Colors.grey),
-      onTap: onTap ?? () {}, // Ensure onTap is being used
+      onTap: onTap ?? () {},
     );
   }
 
-  void _showLogoutBottomSheet() {
+  void _showLogoutBottomSheet(BuildContext context, ProfileProvider provider) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color.fromARGB(0, 45, 52, 75),
+      backgroundColor: const Color(0xff2D344B),
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(12),
-        ),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
       ),
       builder: (BuildContext context) {
         return Padding(
@@ -218,62 +205,36 @@ class _ProfileState extends State<Profile> {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  setState(() {
-                    isLoggedIn = false; // Perform logout action
-                  });
-                  Navigator.of(context).pop(); // Close the bottom sheet
+                  provider.toggleLoginStatus();
+                  Navigator.of(context).pop();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xff2D344B),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  minimumSize: const Size(double.infinity, 100),
+                  minimumSize: const Size(double.infinity, 50),
                 ),
-                child: const Column(
-                  children: [
-                    Text(
-                      'Are you sure you want to go out',
-                      style: TextStyle(
-                          fontFamily: 'SF',
-                          color: Color.fromARGB(241, 247, 249, 247),
-                          fontSize: 16),
-                    ),
-                    Divider(
-                      color: Color.fromARGB(
-                          255, 121, 119, 119), // Color of the divider
-                      thickness: 1, // Thickness of the line
-                    ),
-                    Text(
-                      'Logout',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 20,
-                        fontFamily: 'SF',
-                      ),
-                    ),
-                  ],
+                child: const Text(
+                  'Logout',
+                  style: TextStyle(color: Colors.orange, fontSize: 20),
                 ),
               ),
-              const SizedBox(height: 20),
               const SizedBox(height: 10),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop(); // Close the bottom sheet
+                  Navigator.of(context).pop();
                 },
                 style: TextButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  minimumSize: const Size(500, 60),
                   backgroundColor: const Color(0xff2D344B),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  minimumSize: const Size(double.infinity, 50),
                 ),
                 child: const Text(
                   'Cancel',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.blue,
-                    fontFamily: 'SF',
-                  ),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
               ),
             ],
