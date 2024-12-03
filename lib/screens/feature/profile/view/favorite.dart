@@ -49,16 +49,28 @@ class FavoriteScreen extends StatelessWidget {
                     const SizedBox(
                       height: 200,
                     ),
+                    Image.asset(
+                      'assets/images/Favorite.png',
+                    ),
                     const Center(
                       child: Text(
                         'Favorite is empty',
                         style: TextStyle(
+                          fontWeight: FontWeight.bold,
                           fontFamily: 'SF',
-                          fontSize: 22,
+                          fontSize: 17,
                           color: Color(0xffFFFFFF),
                         ),
                       ),
-                    )
+                    ),
+                    const Text(
+                      'Your favorite packs will be stored here',
+                      style: TextStyle(
+                        fontFamily: 'SF',
+                        fontSize: 13,
+                        color: Color.fromARGB(255, 201, 201, 205),
+                      ),
+                    ),
                   ],
                 ),
               ),
