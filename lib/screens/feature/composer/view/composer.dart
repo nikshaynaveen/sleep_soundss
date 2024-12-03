@@ -13,7 +13,7 @@ class Composer extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -22,8 +22,8 @@ class Composer extends StatelessWidget {
                   "Composer",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 34,
+                    fontWeight: FontWeight.w700,
                     fontFamily: 'SF',
                   ),
                 ),
@@ -116,8 +116,8 @@ class SectionWidget extends StatelessWidget {
             title,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.w500,
+              fontSize: 17,
+              fontWeight: FontWeight.w400,
               fontFamily: 'SF',
             ),
           ),
@@ -128,7 +128,8 @@ class SectionWidget extends StatelessWidget {
             subtitle,
             style: const TextStyle(
               color: Colors.grey,
-              fontSize: 16,
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
               fontFamily: 'SF',
             ),
           ),
@@ -191,8 +192,8 @@ class SectionWidget extends StatelessWidget {
                                   button.label,
                                   style: const TextStyle(
                                     color: Colors.white,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w600,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),

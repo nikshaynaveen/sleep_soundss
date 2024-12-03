@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 class ButtonState with ChangeNotifier {
-  Map<String, List<bool>> _sectionStates = {};
+  final Map<String, List<bool>> _sectionStates = {};
 
   // Getter for section states
   Map<String, List<bool>> get sectionStates => _sectionStates;
