@@ -9,6 +9,7 @@ import 'package:sleep_sounds/screens/feature/launch/view/login_slides.dart';
 import 'package:sleep_sounds/screens/feature/discover/view/discover.dart';
 import 'package:sleep_sounds/screens/feature/launch/provider/auth_provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/favorite_provider.dart';
+import 'package:sleep_sounds/screens/feature/profile/provider/profile_provider.dart';
 
 void main() {
   runApp(
@@ -20,6 +21,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => CategoryProvider()),
         ChangeNotifierProvider(create: (_) => LaunchProvider()),
         ChangeNotifierProvider(create: (_) => BottomContainerProvider()),
+        ChangeNotifierProvider(create: (_) => ProfileProvider()),
       ],
       child: const MyApp(),
     ),
