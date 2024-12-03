@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sleep_sounds/screens/feature/composer/provider/composer_provider.dart';
+import 'package:sleep_sounds/screens/feature/composer/widgets/button.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/bottom_container_provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/category_provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/mini_music_player_provider.dart';
@@ -26,6 +28,8 @@ void main() {
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
         ChangeNotifierProvider(create: (_) => MusicPlayerProvider()),
         ChangeNotifierProvider(create: (_) => MiniMusicPlayerProvider()),
+        ChangeNotifierProvider(create: (_) => ComposerProvider()),
+        ChangeNotifierProvider(create: (_) => ButtonState()),
       ],
       child: const MyApp(),
     ),
