@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/widgets/category_tab.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/category_provider.dart';
-import 'package:sleep_sounds/screens/feature/discover/widgets/test_grid_pack.dart';
+import 'package:sleep_sounds/screens/feature/discover/widgets/music_pack_grid.dart';
 
 class Discover extends StatelessWidget {
   const Discover({super.key});
@@ -19,9 +19,9 @@ class Discover extends StatelessWidget {
           'Discover',
           style: TextStyle(
             fontFamily: 'SF',
-            fontSize: 30,
+            fontSize: 34,
             color: Colors.white,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
           ),
         ),
         automaticallyImplyLeading: false,
@@ -42,7 +42,7 @@ class Discover extends StatelessWidget {
           ),
           // MusicGrid
           Expanded(
-            child: TestGridPack(
+            child: MusicPackGrid(
               selectedCategory: categoryProvider.selectedCategory,
             ),
           ),

@@ -3,16 +3,18 @@ import 'package:sleep_sounds/screens/feature/discover/widgets/play_fav_button.da
 
 class BottomContainer extends StatelessWidget {
   final String title;
+  final String category;
   final String subtitle;
-  final bool isFavorite; // <-- Add this
-  final VoidCallback onFavoriteToggle; // <-- Add this
+  final bool isFavorite;
+  final VoidCallback onFavoriteToggle;
 
   const BottomContainer({
     super.key,
     required this.title,
+    required this.category,
     required this.subtitle,
-    required this.isFavorite, // <-- Add this
-    required this.onFavoriteToggle, // <-- Add this
+    required this.isFavorite,
+    required this.onFavoriteToggle,
   });
 
   @override
@@ -27,11 +29,14 @@ class BottomContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Divider(
-            thickness: 4,
-            color: Color(0xff2D344B),
-            endIndent: 165,
-            indent: 165,
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Divider(
+              thickness: 4,
+              color: Color(0xff2D344B),
+              endIndent: 160,
+              indent: 160,
+            ),
           ),
           // Title and Subtitle
           Text(
@@ -39,18 +44,44 @@ class BottomContainer extends StatelessWidget {
             style: const TextStyle(
               color: Colors.white,
               fontSize: 34,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w700,
               fontFamily: 'SF',
             ),
           ),
           const SizedBox(height: 4),
-          Text(
-            subtitle,
-            style: const TextStyle(
-              color: Colors.white70,
-              fontSize: 18,
-              fontFamily: 'SF',
-            ),
+          Row(
+            children: [
+              Text(
+                subtitle,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'SF',
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4),
+                child: Text(
+                  '•',
+                  style: TextStyle(
+                    fontFamily: 'SF',
+                    color: Color(0xff79839c),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Text(
+                category,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'SF',
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 20),
           const Divider(color: Color(0xff21283f)),

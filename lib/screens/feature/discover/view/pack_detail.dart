@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/favorite_provider.dart';
@@ -12,22 +14,25 @@ import 'package:sleep_sounds/screens/feature/discover/widgets/mood_dream.dart';
 
 class PackDetail extends StatelessWidget {
   final String title;
+  final String category;
   final String subtitle;
   final String description;
   final String image;
   final List<Map<String, String>> songs;
-  final String mood; // <-- Added mood
-  final String dreams; // <-- Added dreams
+  final String mood;
+  final String dreams;
 
   PackDetail({
     super.key,
     required this.title,
+    required this.category,
     required this.subtitle,
     required this.image,
     required this.description,
     required this.songs,
-    required this.mood, // <-- Added mood
-    required this.dreams, required songTitle, // <-- Added dreams
+    required this.mood,
+    required this.dreams,
+    required songTitle,
   });
 
   final List<String> _iconPaths = [
@@ -66,7 +71,7 @@ class PackDetail extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: const Icon(Icons.arrow_back_ios,
-                          color: Color(0xff4870FF), size: 30),
+                          color: Color(0xff4870FF), size: 24),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
@@ -75,7 +80,8 @@ class PackDetail extends StatelessWidget {
                       'Sleep',
                       style: TextStyle(
                         fontFamily: 'SF',
-                        fontSize: 22,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w400,
                         color: Color(0xff4870FF),
                       ),
                     )
@@ -124,6 +130,7 @@ class PackDetail extends StatelessWidget {
                                   subtitle: subtitle,
                                   description: description,
                                   songs: songs,
+                                  category: category,
                                 );
                               },
                             ).whenComplete(() {
@@ -140,6 +147,7 @@ class PackDetail extends StatelessWidget {
                             favoriteProvider.toggleFavorite(
                                 title); // Update the favorite state
                           },
+                          category: category,
                         ),
                       ),
                   ],

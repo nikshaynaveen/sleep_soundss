@@ -29,7 +29,7 @@ class CategoryTabs extends StatelessWidget {
             },
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 8.0),
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 color: isSelected
                     ? const Color(0xff4870ff)
@@ -40,8 +40,8 @@ class CategoryTabs extends StatelessWidget {
                 children: [
                   Image.asset(
                     category['icon']!,
-                    width: 24,
-                    height: 24,
+                    width: 18,
+                    height: 18,
                   ),
                   const SizedBox(width: 8),
                   Text(
@@ -49,8 +49,8 @@ class CategoryTabs extends StatelessWidget {
                     style: const TextStyle(
                       fontFamily: 'SF',
                       color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 17,
                     ),
                   ),
                 ],

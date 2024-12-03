@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^2.0.16
   just_audio: ^0.9.42
   provider: ^6.1.2
 

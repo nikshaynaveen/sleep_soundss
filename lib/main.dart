@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sleep_sounds/screens/common_widgets/custom_bottomnavbar.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/bottom_container_provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/category_provider.dart';
+import 'package:sleep_sounds/screens/feature/discover/provider/mini_music_player_provider.dart';
+import 'package:sleep_sounds/screens/feature/discover/provider/music_player_provider.dart';
 import 'package:sleep_sounds/screens/feature/launch/provider/launch_provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/navigation_provider.dart';
 import 'package:sleep_sounds/screens/feature/launch/view/launch.dart';
@@ -23,6 +24,8 @@ void main() {
         ChangeNotifierProvider(create: (_) => LaunchProvider()),
         ChangeNotifierProvider(create: (_) => BottomContainerProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
+        ChangeNotifierProvider(create: (_) => MusicPlayerProvider()),
+        ChangeNotifierProvider(create: (_) => MiniMusicPlayerProvider()),
       ],
       child: const MyApp(),
     ),
@@ -40,7 +43,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: const LaunchScreen(),
       routes: {
         '/loginslides': (context) => LoginSlides(),
         '/sleep': (context) => const Discover(),

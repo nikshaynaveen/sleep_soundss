@@ -57,8 +57,8 @@ class LoginSlides extends StatelessWidget {
                         style: const TextStyle(
                           color: Colors.white,
                           fontFamily: 'SF',
-                          fontSize: 38,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 34,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -68,7 +68,8 @@ class LoginSlides extends StatelessWidget {
                         style: const TextStyle(
                           fontFamily: 'SF',
                           color: Colors.white54,
-                          fontSize: 20,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ],
@@ -77,7 +78,6 @@ class LoginSlides extends StatelessWidget {
               },
             ),
           ),
-          const SizedBox(height: 30),
           // Slide Indicator
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
@@ -99,7 +99,7 @@ class LoginSlides extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 60),
           ElevatedButton(
             onPressed: () {
               if (authProvider.currentSlide < slides.length - 1) {
@@ -115,7 +115,7 @@ class LoginSlides extends StatelessWidget {
             },
             style: ElevatedButton.styleFrom(
               elevation: 0,
-              fixedSize: const Size(440, 60),
+              fixedSize: const Size(311, 50),
               backgroundColor: const Color(0xFF21283F),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(24),
@@ -125,13 +125,13 @@ class LoginSlides extends StatelessWidget {
               'Next',
               style: TextStyle(
                 fontFamily: 'SF',
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+                fontSize: 17,
+                fontWeight: FontWeight.w600,
                 color: Colors.white,
               ),
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 80),
         ],
       ),
     );

@@ -27,8 +27,8 @@ class PlayFavButton extends StatelessWidget {
           textStyle: const TextStyle(
             color: Colors.white,
             fontFamily: 'SF',
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+            fontSize: 17,
+            fontWeight: FontWeight.w600,
           ),
         ),
         // Favorite Button
@@ -44,8 +44,8 @@ class PlayFavButton extends StatelessWidget {
           textStyle: TextStyle(
             color: isFavorite ? Colors.orange : Colors.white,
             fontFamily: 'SF',
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+            fontSize: 17,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ],

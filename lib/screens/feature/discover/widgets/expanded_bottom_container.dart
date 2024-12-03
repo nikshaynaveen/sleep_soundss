@@ -7,6 +7,7 @@ import 'package:sleep_sounds/screens/feature/discover/widgets/song_list_widget.d
 
 class ExpandedBottomContainer extends StatelessWidget {
   final String title;
+  final String category;
   final String subtitle;
   final String description;
   final List<Map<String, String>> songs;
@@ -14,6 +15,7 @@ class ExpandedBottomContainer extends StatelessWidget {
   const ExpandedBottomContainer({
     super.key,
     required this.title,
+    required this.category,
     required this.subtitle,
     required this.description,
     required this.songs,
@@ -49,19 +51,45 @@ class ExpandedBottomContainer extends StatelessWidget {
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 34,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w700,
                       fontFamily: 'SF',
                     ),
                   ),
                   const SizedBox(height: 4),
                   // Subtitle
-                  Text(
-                    subtitle,
-                    style: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 18,
-                      fontFamily: 'SF',
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        subtitle,
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'SF',
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 4),
+                        child: Text(
+                          '•',
+                          style: TextStyle(
+                            fontFamily: 'SF',
+                            color: Color(0xff79839c),
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        category,
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'SF',
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 10),
                   const Divider(color: Color(0xff21283f)),
@@ -82,7 +110,8 @@ class ExpandedBottomContainer extends StatelessWidget {
                     'About this Pack',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
                       fontFamily: 'SF',
                     ),
                   ),
@@ -92,8 +121,9 @@ class ExpandedBottomContainer extends StatelessWidget {
                     description,
                     style: const TextStyle(
                       color: Color(0xff9597a3),
-                      fontSize: 16,
+                      fontSize: 17,
                       fontFamily: 'SF',
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -104,8 +134,9 @@ class ExpandedBottomContainer extends StatelessWidget {
                     'Featured On',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 17,
                       fontFamily: 'SF',
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                   const SizedBox(height: 14),

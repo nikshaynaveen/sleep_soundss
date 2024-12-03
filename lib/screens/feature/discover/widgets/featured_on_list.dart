@@ -97,7 +97,9 @@ class FeaturedOnList extends StatelessWidget {
               description: item['description']!,
               songs: item['songs'],
               mood: '',
-              dreams: '', songTitle: null,
+              dreams: '',
+              songTitle: item['song title']!,
+              category: item['category']!,
             ),
           ),
         );

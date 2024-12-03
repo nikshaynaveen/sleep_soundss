@@ -23,8 +23,8 @@ class LaunchScreen extends StatelessWidget {
               'Sleep Sounds',
               style: TextStyle(
                 fontFamily: 'SF',
-                fontWeight: FontWeight.bold,
-                fontSize: 36,
+                fontWeight: FontWeight.w700,
+                fontSize: 34,
                 color: Colors.white,
               ),
             )

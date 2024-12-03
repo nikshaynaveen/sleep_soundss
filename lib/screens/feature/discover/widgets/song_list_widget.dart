@@ -28,10 +28,11 @@ class SongListWidget extends StatelessWidget {
               style: TextStyle(
                 color: Color(0XFF9a9dac),
                 fontFamily: 'SF',
-                fontSize: 14,
+                fontSize: 13,
+                fontWeight: FontWeight.w400,
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 14),
             SizedBox(
               height: containerHeight, // Set dynamic height
               child: ListView.builder(
@@ -51,7 +52,8 @@ class SongListWidget extends StatelessWidget {
                                 style: const TextStyle(
                                   color: Color(0XFF9a9dac),
                                   fontFamily: 'SF',
-                                  fontSize: 14,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
@@ -73,7 +75,8 @@ class SongListWidget extends StatelessWidget {
                                 song['title'] ?? 'Unknown',
                                 style: const TextStyle(
                                   color: Colors.white,
-                                  fontSize: 18,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w400,
                                   fontFamily: 'SF',
                                 ),
                               ),

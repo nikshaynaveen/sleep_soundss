@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_sounds/models/music_data.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/favorite_provider.dart';
+import 'package:sleep_sounds/screens/feature/discover/provider/mini_music_player_provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/view/pack_detail.dart';
-import 'package:sleep_sounds/screens/feature/discover/widgets/music_player_screen.dart';
 
-class TestGridPack extends StatelessWidget {
+class MusicPackGrid extends StatelessWidget {
   final String selectedCategory;
 
-  const TestGridPack({super.key, required this.selectedCategory});
+  const MusicPackGrid({super.key, required this.selectedCategory});
 
   @override
   Widget build(BuildContext context) {
@@ -48,24 +48,25 @@ class TestGridPack extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-  context,
-  MaterialPageRoute(
-    builder: (context) => PackDetail(
-      title: item['title']!,
-      subtitle: item['no of songs']!,
-      image: item['pack bg image']!,
-      description: item['description']!,
-      songs: List<Map<String, String>>.from(item['songs']),
-      mood: item['mood'],
-      dreams: item['dreams'],
-      songTitle: item['songs'] != null &&
-              item['songs'].isNotEmpty &&
-              item['songs'][0]['song title'] != null
-          ? item['songs'][0]['song title']!
-          : 'Unknown Song Title',
-    ),
-  ),
-);
+          context,
+          MaterialPageRoute(
+            builder: (context) => PackDetail(
+              title: item['title']!,
+              subtitle: item['no of songs']!,
+              category: item['category']!,
+              image: item['pack bg image']!,
+              description: item['description']!,
+              songs: List<Map<String, String>>.from(item['songs']),
+              mood: item['mood'],
+              dreams: item['dreams'],
+              songTitle: item['songs'] != null &&
+                      item['songs'].isNotEmpty &&
+                      item['songs'][0]['song title'] != null
+                  ? item['songs'][0]['song title']!
+                  : 'Unknown Song Title',
+            ),
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -94,29 +95,20 @@ class TestGridPack extends StatelessWidget {
                     left: 8,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MusicPlayerScreen(
-                              title: item['title'] ?? 'Unknown Title',
-                              albumArt: item['pack bg image'] ??
-                                  'assets/images/default_image.png',
-                              songUrl: item['songs'] != null &&
-                                      item['songs'].isNotEmpty &&
-                                      item['songs'][0]['url'] != null
-                                  ? item['songs'][0]['url']
-                                  : 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-                              songTitle: item['song title'] ?? 'Unknown Title',
-                            ),
-                          ),
+                        final miniPlayerProvider =
+                            Provider.of<MiniMusicPlayerProvider>(context,
+                                listen: false);
+                        miniPlayerProvider.playSong(
+                          item['title']!,
+                          item['pack bg image']!,
                         );
                       },
                       child: Container(
-                        width: 35,
-                        height: 35,
+                        width: 32,
+                        height: 32,
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Color(0xff0d193e),
+                          color: Color.fromARGB(122, 13, 25, 62),
                         ),
                         child: const Icon(
                           Icons.play_arrow,
@@ -135,8 +127,8 @@ class TestGridPack extends StatelessWidget {
               style: const TextStyle(
                 fontFamily: 'SF',
                 color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+                fontSize: 17,
+                fontWeight: FontWeight.w400,
               ),
             ),
             const SizedBox(height: 4),
@@ -147,7 +139,8 @@ class TestGridPack extends StatelessWidget {
                   style: const TextStyle(
                     fontFamily: 'SF',
                     color: Color(0xff79839c),
-                    fontSize: 14,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 const Padding(
@@ -157,7 +150,8 @@ class TestGridPack extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'SF',
                       color: Color(0xff79839c),
-                      fontSize: 20,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                 ),
@@ -166,7 +160,8 @@ class TestGridPack extends StatelessWidget {
                   style: const TextStyle(
                     fontFamily: 'SF',
                     color: Color(0xff79839c),
-                    fontSize: 14,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ],

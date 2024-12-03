@@ -22,7 +22,8 @@ class MoodDream extends StatelessWidget {
           title,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 20,
+            fontSize: 13,
+            fontWeight: FontWeight.w400,
             fontFamily: 'SF',
           ),
         ),
@@ -31,9 +32,9 @@ class MoodDream extends StatelessWidget {
           subtitle,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 24,
+            fontSize: 22,
             fontFamily: 'SF',
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
           ),
         ),
       ],
