@@ -27,7 +27,7 @@ class PackDetail extends StatelessWidget {
     required this.description,
     required this.songs,
     required this.mood, // <-- Added mood
-    required this.dreams, // <-- Added dreams
+    required this.dreams, required songTitle, // <-- Added dreams
   });
 
   final List<String> _iconPaths = [

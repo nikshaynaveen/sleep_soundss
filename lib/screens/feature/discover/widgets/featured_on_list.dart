@@ -97,7 +97,7 @@ class FeaturedOnList extends StatelessWidget {
               description: item['description']!,
               songs: item['songs'],
               mood: '',
-              dreams: '',
+              dreams: '', songTitle: null,
             ),
           ),
         );
@@ -153,7 +153,7 @@ class FeaturedOnList extends StatelessWidget {
               item['title']!,
               style: const TextStyle(
                 color: Colors.white,
-                fontFamily: 'SH',
+                fontFamily: 'SF',
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
@@ -162,7 +162,7 @@ class FeaturedOnList extends StatelessWidget {
             Text(
               item['subtitle']!,
               style: const TextStyle(
-                fontFamily: 'SH',
+                fontFamily: 'SF',
                 color: Colors.white70,
                 fontSize: 14,
               ),

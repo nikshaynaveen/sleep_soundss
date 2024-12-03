@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sleep_sounds/screens/common_widgets/custom_bottomnavbar.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/bottom_container_provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/category_provider.dart';
 import 'package:sleep_sounds/screens/feature/launch/provider/launch_provider.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LaunchScreen(),
+      home: HomePage(),
       routes: {
         '/loginslides': (context) => LoginSlides(),
         '/sleep': (context) => const Discover(),

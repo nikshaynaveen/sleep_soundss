@@ -59,6 +59,7 @@ class _ProfileState extends State<Profile> {
           Text(
             isLoggedIn ? 'First name Last name' : 'Authorization',
             style: const TextStyle(
+              fontFamily: 'SF',
               color: Colors.white,
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -70,7 +71,11 @@ class _ProfileState extends State<Profile> {
                 ? 'Log in with Apple ID \n  email@gmail.com'
                 : 'In order to access the library of favorite packs of sounds,Log in with Apple ID',
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 14, color: Colors.grey),
+            style: const TextStyle(
+              fontSize: 14,
+              color: Colors.grey,
+              fontFamily: 'SF',
+            ),
           ),
           const SizedBox(height: 10),
           ElevatedButton(
@@ -93,7 +98,11 @@ class _ProfileState extends State<Profile> {
             child: isLoggedIn
                 ? const Text(
                     'Logout',
-                    style: TextStyle(color: Colors.orange, fontSize: 18),
+                    style: TextStyle(
+                      color: Colors.orange,
+                      fontSize: 18,
+                      fontFamily: 'SF',
+                    ),
                   )
                 : const Row(
                     mainAxisSize: MainAxisSize.min,
@@ -102,7 +111,11 @@ class _ProfileState extends State<Profile> {
                       SizedBox(width: 8),
                       Text(
                         'Login with Apple ID',
-                        style: TextStyle(color: Colors.white, fontSize: 17),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontFamily: 'SF',
+                        ),
                       ),
                     ],
                   ),
@@ -177,6 +190,7 @@ class _ProfileState extends State<Profile> {
       title: Text(
         title,
         style: TextStyle(
+          fontFamily: 'SF',
           color: textColor ?? Colors.white,
           fontWeight: FontWeight.bold,
         ),
@@ -221,6 +235,7 @@ class _ProfileState extends State<Profile> {
                     Text(
                       'Are you sure you want to go out',
                       style: TextStyle(
+                          fontFamily: 'SF',
                           color: Color.fromARGB(241, 247, 249, 247),
                           fontSize: 16),
                     ),
@@ -231,7 +246,11 @@ class _ProfileState extends State<Profile> {
                     ),
                     Text(
                       'Logout',
-                      style: TextStyle(color: Colors.blue, fontSize: 20),
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 20,
+                        fontFamily: 'SF',
+                      ),
                     ),
                   ],
                 ),
@@ -250,7 +269,11 @@ class _ProfileState extends State<Profile> {
                 ),
                 child: const Text(
                   'Cancel',
-                  style: TextStyle(fontSize: 20, color: Colors.blue),
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.blue,
+                    fontFamily: 'SF',
+                  ),
                 ),
               ),
             ],

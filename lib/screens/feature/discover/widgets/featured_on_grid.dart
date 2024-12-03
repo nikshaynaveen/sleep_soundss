@@ -101,7 +101,7 @@ class FeaturedOnGrid extends StatelessWidget {
               subtitle: item['subtitle']!,
               image: item['image']!,
               description: item['description']!,
-              songs: item['songs'], mood: '', dreams: '',
+              songs: item['songs'], mood: '', dreams: '', songTitle: null,
             ),
           ),
         );

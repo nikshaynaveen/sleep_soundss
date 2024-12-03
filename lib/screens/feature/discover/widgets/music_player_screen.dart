@@ -1,168 +1,182 @@
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
+import 'package:provider/provider.dart';
+import 'package:sleep_sounds/screens/feature/discover/provider/music_player_provider.dart';
 
-class MusicPlayerScreen extends StatefulWidget {
+class MusicPlayerScreen extends StatelessWidget {
   final String title;
   final String albumArt;
   final String songUrl;
+  final String songTitle;
 
   const MusicPlayerScreen({
     super.key,
     required this.title,
     required this.albumArt,
     required this.songUrl,
+    required this.songTitle,
   });
 
-  @override
-  _MusicPlayerScreenState createState() => _MusicPlayerScreenState();
-}
-
-class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
-  late AudioPlayer _audioPlayer;
-  bool _isPlaying = false;
-  bool _isLoaded = false;
-  Duration _totalDuration = Duration.zero;
-  Duration _currentPosition = Duration.zero;
-
-  @override
-  void initState() {
-    super.initState();
-    _audioPlayer = AudioPlayer();
-
-    // Add listeners for state changes
-    _audioPlayer.playerStateStream.listen((state) {
-      setState(() {
-        _isPlaying = state.playing;
-      });
-    });
-
-    _initializeAudio();
-  }
-
-  Future<void> _initializeAudio() async {
-    try {
-      await _audioPlayer.setUrl(widget.songUrl);
-      _audioPlayer.positionStream.listen((position) {
-        setState(() {
-          _currentPosition = position;
-        });
-      });
-      _audioPlayer.durationStream.listen((duration) {
-        setState(() {
-          _totalDuration = duration ?? Duration.zero;
-        });
-      });
-      setState(() {
-        _isLoaded = true;
-      });
-    } catch (e) {
-      print("Error loading audio: $e"); // Check for errors here
-      setState(() {
-        _isLoaded = false;
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-    super.dispose();
-  }
-
-  void _togglePlayPause() async {
-    if (_isPlaying) {
-      await _audioPlayer.pause();
-    } else {
-      await _audioPlayer.play();
-    }
-    setState(() {
-      _isPlaying = !_isPlaying;
-    });
+  // Helper function to format the duration
+  String _formatDuration(Duration duration) {
+    return duration.toString().split('.').first.substring(2);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Text(widget.title),
-      ),
-      body: _isLoaded
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // Album Art
-                Container(
-                  height: 200,
-                  width: 200,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(widget.albumArt),
-                      fit: BoxFit.cover,
+    return ChangeNotifierProvider(
+      create: (_) {
+        final provider = MusicPlayerProvider();
+        provider.initialize(songUrl);
+        return provider;
+      },
+      child: Consumer<MusicPlayerProvider>(
+        builder: (context, provider, _) {
+          return Scaffold(
+            backgroundColor: const Color(0xff141927),
+            body: SafeArea(
+              child: Column(
+                children: [
+                  // Collapse Icon
+                  Center(
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.keyboard_arrow_down,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        // Functionality to be added later
+                      },
                     ),
-                    borderRadius: BorderRadius.circular(12),
                   ),
-                ),
-                const SizedBox(height: 20),
-                // Song Title
-                Text(
-                  widget.title,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                  const SizedBox(height: 120),
+                  // Album Art
+                  Container(
+                    height: 164,
+                    width: 164,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(albumArt),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                // Time Display
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      _currentPosition.toString().split('.').first,
-                      style: const TextStyle(color: Colors.white60),
+                  const SizedBox(height: 20),
+                  // Pack Name
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontFamily: 'SF',
+                      fontSize: 18,
+                      color: Colors.white70,
                     ),
-                    const SizedBox(width: 10),
-                    Text(
-                      _totalDuration.toString().split('.').first,
-                      style: const TextStyle(color: Colors.white60),
+                  ),
+                  const SizedBox(height: 10),
+                  // Song Title
+                  Text(
+                    songTitle,
+                    style: const TextStyle(
+                      fontFamily: 'SF',
+                      fontSize: 34,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                // Progress Bar
-                Slider(
-                  value: _currentPosition.inSeconds.toDouble(),
-                  min: 0.0,
-                  max: _totalDuration.inSeconds > 0
-                      ? _totalDuration.inSeconds.toDouble()
-                      : 1.0,
-                  onChanged: (value) {
-                    if (_isLoaded) {
-                      setState(() {
-                        _audioPlayer.seek(Duration(seconds: value.toInt()));
-                      });
-                    }
-                  },
-                ),
+                  ),
+                  const SizedBox(height: 20),
+                  // Progress Bar
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      thumbShape: const RoundSliderThumbShape(
+                        enabledThumbRadius: 6.0, // Adjust the radius size
+                      ),
+                      activeTrackColor: const Color(0xff4870FF),
+                      inactiveTrackColor: const Color(0xff21283F),
+                      thumbColor: const Color(0xff4870FF),
+                      overlayColor: const Color(0xff4870FF).withOpacity(0.2),
+                    ),
+                    child: Slider(
+                      value: provider.currentPosition.inSeconds.toDouble(),
+                      min: 0.0,
+                      max: provider.totalDuration.inSeconds > 0
+                          ? provider.totalDuration.inSeconds.toDouble()
+                          : 1.0,
+                      onChanged: (value) {
+                        provider.seek(Duration(seconds: value.toInt()));
+                      },
+                    ),
+                  ),
 
-                const SizedBox(height: 20),
-                // Play/Pause Button
-                IconButton(
-                  icon: Icon(
-                    _isPlaying ? Icons.pause : Icons.play_arrow,
-                    size: 40,
-                    color: Colors.white,
+                  // Timer Display
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          _formatDuration(provider.currentPosition),
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontFamily: 'SF',
+                          ),
+                        ),
+                        Text(
+                          _formatDuration(provider.totalDuration),
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontFamily: 'SF',
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  onPressed: _togglePlayPause,
-                ),
-              ],
-            )
-          : const Center(
-              child: CircularProgressIndicator(),
+
+                  const SizedBox(height: 20),
+                  // Control Buttons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Previous Song Icon
+                      IconButton(
+                        icon: const Icon(
+                          Icons.skip_previous,
+                          size: 40,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          // Functionality for previous song
+                        },
+                      ),
+                      const SizedBox(width: 20),
+                      // Play/Pause Button
+                      IconButton(
+                        icon: Icon(
+                          provider.isPlaying ? Icons.pause : Icons.play_arrow,
+                          size: 40,
+                          color: Colors.white,
+                        ),
+                        onPressed: provider.togglePlayPause,
+                      ),
+                      const SizedBox(width: 20),
+                      // Next Song Icon
+                      IconButton(
+                        icon: const Icon(
+                          Icons.skip_next,
+                          size: 40,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          // Functionality for next song
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
+          );
+        },
+      ),
     );
   }
 }

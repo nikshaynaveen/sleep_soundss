@@ -207,6 +207,8 @@ class _SectionWidgetState extends State<SectionWidget> {
                               child: Text(
                                 button.label,
                                 style: const TextStyle(
+                                                  fontFamily: 'SF',
+
                                   color: Colors.white,
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,
