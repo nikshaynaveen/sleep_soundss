@@ -7,9 +7,13 @@ class SongListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Calculate the height based on the number of songs
+    // Get screen dimensions
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // Calculate the height based on the number of songs and screen height
     double itemHeight =
-        58.0; // Height for each song item (you can adjust this value)
+        screenHeight * 0.07; // Adjusted height for each song item
     double containerHeight =
         songs.length * itemHeight; // Total height for the container
 
@@ -19,7 +23,7 @@ class SongListWidget extends StatelessWidget {
         color: Color(0xff21283f),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(18),
+        padding: EdgeInsets.all(screenWidth * 0.05), // Responsive padding
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -42,17 +46,22 @@ class SongListWidget extends StatelessWidget {
                   return Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        padding: EdgeInsets.symmetric(
+                            vertical: screenHeight *
+                                0.01), // Responsive padding for each item
                         child: Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(right: 16.0),
+                              padding: EdgeInsets.only(
+                                  right:
+                                      screenWidth * 0.04), // Responsive padding
                               child: Text(
                                 (index + 1).toString().padLeft(2, '0'),
-                                style: const TextStyle(
-                                  color: Color(0XFF9a9dac),
+                                style: TextStyle(
+                                  color: const Color(0XFF9a9dac),
                                   fontFamily: 'SF',
-                                  fontSize: 13,
+                                  fontSize: screenWidth *
+                                      0.035, // Responsive font size
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -62,20 +71,25 @@ class SongListWidget extends StatelessWidget {
                                 color: Color(0xff181d2e),
                                 shape: BoxShape.circle,
                               ),
-                              padding: const EdgeInsets.all(5),
-                              child: const Icon(
+                              padding: EdgeInsets.all(
+                                  screenWidth * 0.02), // Responsive icon size
+                              child: Icon(
                                 Icons.play_arrow,
                                 color: Colors.white,
-                                size: 24,
+                                size:
+                                    screenWidth * 0.04, // Responsive icon size
                               ),
                             ),
-                            const SizedBox(width: 16),
+                            SizedBox(
+                                width:
+                                    screenWidth * 0.04), // Responsive spacing
                             Expanded(
                               child: Text(
                                 song['title'] ?? 'Unknown',
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 17,
+                                  fontSize: screenWidth *
+                                      0.045, // Responsive font size
                                   fontWeight: FontWeight.w400,
                                   fontFamily: 'SF',
                                 ),

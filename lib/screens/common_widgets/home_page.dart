@@ -37,7 +37,17 @@ class HomePage extends StatelessWidget {
       body: Stack(
         children: [
           // Current page content
-          _pages[selectedIndex],
+          WillPopScope(
+            onWillPop: () async {
+              // If we are on Composer or Profile page, return false to prevent exit
+              if (selectedIndex == 1 || selectedIndex == 2) {
+                navigationProvider.setIndex(0); // Navigate to Discover
+                return false; // Prevent app from exiting
+              }
+              return true; // Allow the back button to exit the app
+            },
+            child: _pages[selectedIndex],
+          ),
 
           // Mini Music Player
           if (miniPlayerProvider.isVisible)

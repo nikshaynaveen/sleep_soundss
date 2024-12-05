@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:sleep_sounds/screens/feature/discover/view/pack_detail.dart';
 
@@ -74,17 +72,22 @@ class FeaturedOnList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen dimensions
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: featuredItems.length,
       itemBuilder: (context, index) {
         final item = featuredItems[index];
-        return _buildHorizontalItem(context, item);
+        return _buildHorizontalItem(context, item, screenWidth, screenHeight);
       },
     );
   }
 
-  Widget _buildHorizontalItem(BuildContext context, Map<String, dynamic> item) {
+  Widget _buildHorizontalItem(BuildContext context, Map<String, dynamic> item,
+      double screenWidth, double screenHeight) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -92,6 +95,7 @@ class FeaturedOnList extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => PackDetail(
               title: item['title']!,
+              albumArt: item['pack bg image']!,
               subtitle: item['subtitle']!,
               image: item['image']!,
               description: item['description']!,
@@ -105,8 +109,9 @@ class FeaturedOnList extends StatelessWidget {
         );
       },
       child: Container(
-        width: 170,
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+        width: screenWidth * 0.45, // Responsive width for the container
+        margin: EdgeInsets.symmetric(
+            horizontal: screenWidth * 0.03), // Responsive margin
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -127,22 +132,24 @@ class FeaturedOnList extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    top: 8,
-                    left: 8,
+                    top: screenHeight *
+                        0.015, // Responsive position for the play button
+                    left: screenWidth * 0.015,
                     child: GestureDetector(
                       onTap: () {
                         print("Play button clicked for ${item['title']}");
                       },
                       child: Container(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(
+                            screenWidth * 0.02), // Responsive padding
                         decoration: BoxDecoration(
                           color: Colors.black.withOpacity(0.6),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.play_arrow,
                           color: Colors.white,
-                          size: 22,
+                          size: screenWidth * 0.07, // Responsive icon size
                         ),
                       ),
                     ),
@@ -150,23 +157,23 @@ class FeaturedOnList extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: screenHeight * 0.015), // Responsive spacing
             Text(
               item['title']!,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'SF',
-                fontSize: 16,
+                fontSize: screenWidth * 0.045, // Responsive font size
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: screenHeight * 0.008), // Responsive spacing
             Text(
               item['subtitle']!,
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'SF',
                 color: Colors.white70,
-                fontSize: 14,
+                fontSize: screenWidth * 0.035, // Responsive font size
               ),
             ),
           ],

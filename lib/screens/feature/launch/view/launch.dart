@@ -9,25 +9,34 @@ class LaunchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<LaunchProvider>().initiateLaunch(context);
 
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: const Color(0xff141927),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/launch_icon.png'),
-            const SizedBox(
-              height: 10,
+            // Image scales dynamically based on screen size
+            Image.asset(
+              'assets/images/launch_icon.png',
+              width: screenWidth * 0.4,
+              height: screenHeight * 0.2,
             ),
-            const Text(
+            SizedBox(
+              height: screenHeight * 0.02,
+            ),
+            // Text scales dynamically based on screen width
+            Text(
               'Sleep Sounds',
               style: TextStyle(
                 fontFamily: 'SF',
                 fontWeight: FontWeight.w700,
-                fontSize: 34,
+                fontSize: screenWidth * 0.08,
                 color: Colors.white,
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -4,6 +4,7 @@ import 'package:sleep_sounds/screens/feature/discover/provider/category_provider
 
 class CategoryTabs extends StatelessWidget {
   final Function(String) onCategorySelected;
+
   CategoryTabs({required this.onCategorySelected, super.key});
 
   final List<Map<String, String>> categories = [
@@ -15,6 +16,10 @@ class CategoryTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categoryProvider = Provider.of<CategoryProvider>(context);
+
+    // Get screen width and height
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -28,8 +33,11 @@ class CategoryTabs extends StatelessWidget {
               onCategorySelected(category['name']!);
             },
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8.0),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+              padding: EdgeInsets.symmetric(
+                horizontal: screenWidth * 0.04,
+                vertical: screenHeight * 0.01,
+              ),
               decoration: BoxDecoration(
                 color: isSelected
                     ? const Color(0xff4870ff)
@@ -40,17 +48,17 @@ class CategoryTabs extends StatelessWidget {
                 children: [
                   Image.asset(
                     category['icon']!,
-                    width: 18,
-                    height: 18,
+                    width: screenWidth * 0.045,
+                    height: screenWidth * 0.045,
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: screenWidth * 0.02),
                   Text(
                     category['name']!,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontFamily: 'SF',
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
-                      fontSize: 17,
+                      fontSize: screenWidth * 0.04,
                     ),
                   ),
                 ],

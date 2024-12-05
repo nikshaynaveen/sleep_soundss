@@ -1,11 +1,9 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/favorite_provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/navigation_provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/bottom_container_provider.dart';
-import 'package:sleep_sounds/screens/common_widgets/custom_bottomnavbar.dart';
+import 'package:sleep_sounds/screens/common_widgets/home_page.dart';
 import 'package:sleep_sounds/screens/feature/discover/view/discover.dart';
 import 'package:sleep_sounds/screens/feature/discover/widgets/bottom_container.dart';
 import 'package:sleep_sounds/screens/feature/discover/widgets/custom_bottom_nav_bar.dart';
@@ -14,6 +12,7 @@ import 'package:sleep_sounds/screens/feature/discover/widgets/mood_dream.dart';
 
 class PackDetail extends StatelessWidget {
   final String title;
+  final String albumArt;
   final String category;
   final String subtitle;
   final String description;
@@ -25,6 +24,7 @@ class PackDetail extends StatelessWidget {
   PackDetail({
     super.key,
     required this.title,
+    required this.albumArt,
     required this.category,
     required this.subtitle,
     required this.image,
@@ -45,6 +45,9 @@ class PackDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     final favoriteProvider = Provider.of<FavoriteProvider>(context);
     final navigationProvider = Provider.of<NavigationProvider>(context);
     final bottomContainerProvider =
@@ -54,7 +57,10 @@ class PackDetail extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
+          // Background Image
           Container(
+            height: screenHeight,
+            width: screenWidth,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(image),
@@ -66,25 +72,29 @@ class PackDetail extends StatelessWidget {
             children: [
               // AppBar
               Container(
-                padding: const EdgeInsets.only(top: 40.0, left: 10.0),
+                padding: EdgeInsets.only(
+                  top: screenHeight * 0.05,
+                  left: screenWidth * 0.03,
+                ),
                 child: Row(
                   children: [
                     IconButton(
                       icon: const Icon(Icons.arrow_back_ios,
-                          color: Color(0xff4870FF), size: 24),
+                          color: Color(0xff4870FF)),
+                      iconSize: screenWidth * 0.06,
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
                     ),
-                    const Text(
+                    Text(
                       'Sleep',
                       style: TextStyle(
                         fontFamily: 'SF',
-                        fontSize: 17,
+                        fontSize: screenWidth * 0.045,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xff4870FF),
+                        color: const Color(0xff4870FF),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -92,29 +102,36 @@ class PackDetail extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 170),
-                    // Mood and Dreams
+                    SizedBox(height: screenHeight * 0.2),
+                    // Mood and Dreams Section
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         MoodDream(
-                          icon: Image.asset('assets/icons/moodicon.png',
-                              scale: 0.8, width: 36, height: 36),
+                          icon: Image.asset(
+                            'assets/icons/moodicon.png',
+                            scale: 0.8,
+                            width: screenWidth * 0.1,
+                            height: screenHeight * 0.05,
+                          ),
                           title: 'Mood',
-                          subtitle: mood, // <-- Use dynamic mood
+                          subtitle: mood,
                         ),
-                        const SizedBox(width: 30),
+                        SizedBox(width: screenWidth * 0.07),
                         MoodDream(
-                          icon: Image.asset('assets/icons/dreamicon.png',
-                              scale: 0.8, width: 36, height: 36),
+                          icon: Image.asset(
+                            'assets/icons/dreamicon.png',
+                            scale: 0.8,
+                            width: screenWidth * 0.1,
+                            height: screenHeight * 0.05,
+                          ),
                           title: 'Dreams',
-                          subtitle: dreams, // <-- Use dynamic dreams
+                          subtitle: dreams,
                         ),
                       ],
                     ),
                     const Spacer(),
                     // Bottom Container
-
                     if (!bottomContainerProvider.isExpanded)
                       GestureDetector(
                         onVerticalDragUpdate: (details) {
@@ -131,6 +148,7 @@ class PackDetail extends StatelessWidget {
                                   description: description,
                                   songs: songs,
                                   category: category,
+                                  albumArt: albumArt,
                                 );
                               },
                             ).whenComplete(() {
@@ -140,12 +158,11 @@ class PackDetail extends StatelessWidget {
                         },
                         child: BottomContainer(
                           title: title,
+                          albumArt: albumArt,
                           subtitle: subtitle,
-                          isFavorite: favoriteProvider
-                              .isFavorite(title), // Get from provider
+                          isFavorite: favoriteProvider.isFavorite(title),
                           onFavoriteToggle: () {
-                            favoriteProvider.toggleFavorite(
-                                title); // Update the favorite state
+                            favoriteProvider.toggleFavorite(title);
                           },
                           category: category,
                         ),
@@ -172,6 +189,7 @@ class PackDetail extends StatelessWidget {
                 (route) => false,
               ).then((_) {
                 Navigator.pushAndRemoveUntil(
+                  // ignore: use_build_context_synchronously
                   context,
                   MaterialPageRoute(builder: (context) => const Discover()),
                   (route) => false,

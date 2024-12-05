@@ -32,11 +32,19 @@ class MiniMusicPlayer extends StatelessWidget {
                 filter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: const Color(0xff141927).withOpacity(0.24),
+                    gradient: LinearGradient(
+                      colors: [
+                        const Color(0xff1a2a50).withOpacity(0.24),
+                        const Color(0xff1a2a50).withOpacity(0.70),
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
                   ),
                 ),
               ),
             ),
+
             // Player Content
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

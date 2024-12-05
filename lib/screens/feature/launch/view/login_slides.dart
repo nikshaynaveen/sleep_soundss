@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sleep_sounds/screens/common_widgets/custom_bottomnavbar.dart';
+import 'package:sleep_sounds/screens/common_widgets/home_page.dart';
 import '../provider/auth_provider.dart';
 
 class LoginSlides extends StatelessWidget {
@@ -31,12 +31,15 @@ class LoginSlides extends StatelessWidget {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
 
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: const Color(0xFF141927),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: 50),
+          SizedBox(height: screenHeight * 0.05),
           Expanded(
             child: PageView.builder(
               controller: authProvider.pageController,
@@ -46,29 +49,33 @@ class LoginSlides extends StatelessWidget {
               itemCount: slides.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(slides[index]['image']!),
-                      const SizedBox(height: 30),
+                      Image.asset(
+                        slides[index]['image']!,
+                        width: screenWidth * 0.7,
+                        height: screenHeight * 0.3,
+                      ),
+                      SizedBox(height: screenHeight * 0.03),
                       Text(
                         slides[index]['title']!,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'SF',
-                          fontSize: 34,
+                          fontSize: screenWidth * 0.085,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: screenHeight * 0.015),
                       Text(
                         slides[index]['description']!,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: 'SF',
                           color: Colors.white54,
-                          fontSize: 17,
+                          fontSize: screenWidth * 0.04,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -80,15 +87,15 @@ class LoginSlides extends StatelessWidget {
           ),
           // Slide Indicator
           Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
+            padding: EdgeInsets.only(bottom: screenHeight * 0.02),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 slides.length,
                 (index) => Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 5),
-                  width: 10,
-                  height: 10,
+                  margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.015),
+                  width: screenWidth * 0.025,
+                  height: screenWidth * 0.025,
                   decoration: BoxDecoration(
                     color: index == authProvider.currentSlide
                         ? const Color(0xff4870ff)
@@ -99,7 +106,7 @@ class LoginSlides extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 60),
+          SizedBox(height: screenHeight * 0.06),
           ElevatedButton(
             onPressed: () {
               if (authProvider.currentSlide < slides.length - 1) {
@@ -115,23 +122,25 @@ class LoginSlides extends StatelessWidget {
             },
             style: ElevatedButton.styleFrom(
               elevation: 0,
-              fixedSize: const Size(311, 50),
+              fixedSize: Size(screenWidth * 0.8, screenHeight * 0.06),
               backgroundColor: const Color(0xFF21283F),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(24),
               ),
             ),
-            child: const Text(
-              'Next',
+            child: Text(
+              authProvider.currentSlide == slides.length - 1
+                  ? 'Start'
+                  : 'Next', // Change button text conditionally
               style: TextStyle(
                 fontFamily: 'SF',
-                fontSize: 17,
+                fontSize: screenWidth * 0.045,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
               ),
             ),
           ),
-          const SizedBox(height: 80),
+          SizedBox(height: screenHeight * 0.08),
         ],
       ),
     );

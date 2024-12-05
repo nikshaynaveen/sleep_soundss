@@ -10,16 +10,19 @@ class Discover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categoryProvider = Provider.of<CategoryProvider>(context);
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: const Color(0xff141927),
       appBar: AppBar(
         backgroundColor: const Color(0xff141927),
-        title: const Text(
+        title: Text(
           'Discover',
           style: TextStyle(
             fontFamily: 'SF',
-            fontSize: 34,
+            fontSize:
+                screenWidth * 0.09, // Scaled font size based on screen width
             color: Colors.white,
             fontWeight: FontWeight.w700,
           ),
@@ -31,19 +34,23 @@ class Discover extends StatelessWidget {
         children: [
           // CategoryTabs
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(screenWidth * 0.02), // Scaled padding
             child: CategoryTabs(
               onCategorySelected: (category) =>
                   categoryProvider.setCategory(category),
             ),
           ),
-          const SizedBox(
-            height: 8,
+          SizedBox(
+            height: screenHeight * 0.01, // Scaled spacing
           ),
           // MusicGrid
           Expanded(
-            child: MusicPackGrid(
-              selectedCategory: categoryProvider.selectedCategory,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return MusicPackGrid(
+                  selectedCategory: categoryProvider.selectedCategory,
+                );
+              },
             ),
           ),
         ],

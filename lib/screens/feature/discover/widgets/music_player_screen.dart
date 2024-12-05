@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/music_player_provider.dart';
 
@@ -24,6 +24,8 @@ class MusicPlayerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     final provider = Provider.of<MusicPlayerProvider>(context, listen: false);
     provider.initialize(songUrl);
 
@@ -35,8 +37,8 @@ class MusicPlayerScreen extends StatelessWidget {
             Center(
               child: IconButton(
                 icon: SvgPicture.asset('assets/icons/collapse_arrow_down.svg',
-                    width: 20,
-                    height: 20,
+                    width: screenWidth * 0.06,
+                    height: screenWidth * 0.06,
                     colorFilter: const ColorFilter.mode(
                       Color.fromARGB(87, 255, 255, 255),
                       BlendMode.srcIn,
@@ -44,11 +46,12 @@ class MusicPlayerScreen extends StatelessWidget {
                 onPressed: () => Navigator.pop(context),
               ),
             ),
-            const SizedBox(height: 120),
+            SizedBox(height: screenHeight * 0.08), // Responsive spacing
+
             // Album Art
             Container(
-              height: 164,
-              width: 164,
+              height: screenWidth * 0.45, // Responsive album art size
+              width: screenWidth * 0.45,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(albumArt),
@@ -57,28 +60,31 @@ class MusicPlayerScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: screenHeight * 0.02), // Responsive spacing
+
             // Pack Name
             Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'SF',
-                fontSize: 18,
+                fontSize: screenWidth * 0.05, // Responsive font size
                 color: Colors.white70,
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: screenHeight * 0.01), // Responsive spacing
+
             // Song Title
             Text(
               songTitle,
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'SF',
-                fontSize: 34,
+                fontSize: screenWidth * 0.085, // Responsive font size
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: screenHeight * 0.02), // Responsive spacing
+
             // Progress Bar
             Consumer<MusicPlayerProvider>(
               builder: (context, provider, _) {
@@ -105,9 +111,10 @@ class MusicPlayerScreen extends StatelessWidget {
                 );
               },
             ),
+
             // Timer Display
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -115,9 +122,10 @@ class MusicPlayerScreen extends StatelessWidget {
                     builder: (context, provider, _) {
                       return Text(
                         _formatDuration(provider.currentPosition),
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white70,
                           fontFamily: 'SF',
+                          fontSize: screenWidth * 0.035, // Responsive font size
                         ),
                       );
                     },
@@ -126,9 +134,10 @@ class MusicPlayerScreen extends StatelessWidget {
                     builder: (context, provider, _) {
                       return Text(
                         _formatDuration(provider.totalDuration),
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white70,
                           fontFamily: 'SF',
+                          fontSize: screenWidth * 0.035, // Responsive font size
                         ),
                       );
                     },
@@ -136,7 +145,8 @@ class MusicPlayerScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: screenHeight * 0.06), // Responsive spacing
+
             // Control Buttons
             Consumer<MusicPlayerProvider>(
               builder: (context, provider, _) {
@@ -144,29 +154,29 @@ class MusicPlayerScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.fast_rewind,
-                        size: 40,
+                        size: screenWidth * 0.1, // Responsive icon size
                         color: Colors.white,
                       ),
                       onPressed: () {
                         // Functionality for previous song
                       },
                     ),
-                    const SizedBox(width: 20),
+                    SizedBox(width: screenWidth * 0.05), // Responsive spacing
                     IconButton(
                       icon: Icon(
                         provider.isPlaying ? Icons.pause : Icons.play_arrow,
-                        size: 40,
+                        size: screenWidth * 0.1, // Responsive icon size
                         color: Colors.white,
                       ),
                       onPressed: provider.togglePlayPause,
                     ),
-                    const SizedBox(width: 20),
+                    SizedBox(width: screenWidth * 0.05), // Responsive spacing
                     IconButton(
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.fast_forward,
-                        size: 40,
+                        size: screenWidth * 0.1, // Responsive icon size
                         color: Colors.white,
                       ),
                       onPressed: () {

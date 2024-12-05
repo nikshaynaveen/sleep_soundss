@@ -3,6 +3,7 @@ import 'package:sleep_sounds/screens/feature/discover/widgets/play_fav_button.da
 
 class BottomContainer extends StatelessWidget {
   final String title;
+  final String albumArt;
   final String category;
   final String subtitle;
   final bool isFavorite;
@@ -11,6 +12,7 @@ class BottomContainer extends StatelessWidget {
   const BottomContainer({
     super.key,
     required this.title,
+    required this.albumArt,
     required this.category,
     required this.subtitle,
     required this.isFavorite,
@@ -19,8 +21,16 @@ class BottomContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen dimensions
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
-      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+      padding: EdgeInsets.only(
+        left: screenWidth * 0.05,
+        right: screenWidth * 0.05,
+        bottom: screenHeight * 0.02,
+      ),
       decoration: const BoxDecoration(
         color: Color(0xff141927),
         borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
@@ -29,71 +39,73 @@ class BottomContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
             child: Divider(
-              thickness: 4,
-              color: Color(0xff2D344B),
-              endIndent: 160,
-              indent: 160,
+              thickness: screenHeight * 0.005,
+              color: const Color(0xff2D344B),
+              endIndent: screenWidth * 0.4,
+              indent: screenWidth * 0.4,
             ),
           ),
           // Title and Subtitle
           Text(
             title,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
-              fontSize: 34,
+              fontSize: screenWidth * 0.085,
               fontWeight: FontWeight.w700,
               fontFamily: 'SF',
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: screenHeight * 0.005),
           Row(
             children: [
               Text(
                 subtitle,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white70,
-                  fontSize: 15,
+                  fontSize: screenWidth * 0.04,
                   fontWeight: FontWeight.w400,
                   fontFamily: 'SF',
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.01),
                 child: Text(
                   '•',
                   style: TextStyle(
                     fontFamily: 'SF',
-                    color: Color(0xff79839c),
-                    fontSize: 13,
+                    color: const Color(0xff79839c),
+                    fontSize: screenWidth * 0.035,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
               Text(
                 category,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white70,
-                  fontSize: 15,
+                  fontSize: screenWidth * 0.04,
                   fontWeight: FontWeight.w400,
                   fontFamily: 'SF',
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: screenHeight * 0.02),
           const Divider(color: Color(0xff21283f)),
-          const SizedBox(height: 2),
+          SizedBox(height: screenHeight * 0.005),
 
           // Play and Favorite Button
           PlayFavButton(
             isFavorite: isFavorite,
             onFavoriteToggle: onFavoriteToggle,
+            title: title, // Pass title
+            albumArt: albumArt, // Pass albumArt
           ),
 
-          const SizedBox(height: 2),
+          SizedBox(height: screenHeight * 0.005),
         ],
       ),
     );
