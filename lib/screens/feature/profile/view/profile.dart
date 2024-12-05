@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sleep_sounds/screens/common_widgets/images_path.dart';
 import 'package:sleep_sounds/screens/feature/profile/view/favorite.dart';
 import 'package:sleep_sounds/screens/feature/profile/provider/profile_provider.dart';
 
@@ -9,110 +10,128 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final profileProvider = Provider.of<ProfileProvider>(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: const Color(0xff141927),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "  Profile",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'SF',
-              ),
+        child: ListView(children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: screenWidth * 0.05, // 5% horizontal padding
             ),
-            const SizedBox(height: 20),
-            _buildAuthorizationSection(context, profileProvider),
-            const SizedBox(height: 20),
-            _buildOptionsSection(context, profileProvider),
-          ],
-        ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "  Profile",
+                  style: TextStyle(
+                    color: Color(0xffFFFFFF),
+                    fontSize: 34,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'SF',
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.03), // 3% height
+                _buildAuthorizationSection(
+                    context, profileProvider, screenWidth, screenHeight),
+                SizedBox(height: screenHeight * 0.03),
+                _buildOptionsSection(
+                    context, profileProvider, screenWidth, screenHeight),
+              ],
+            ),
+          ),
+        ]),
       ),
     );
   }
 
   Widget _buildAuthorizationSection(
-      BuildContext context, ProfileProvider profileProvider) {
+      BuildContext context,
+      ProfileProvider profileProvider,
+      double screenWidth,
+      double screenHeight) {
+    Size size = MediaQuery.of(context).size;
     return Center(
       child: Padding(
-        padding: const EdgeInsets.only(left: 15, right: 15),
+        padding: const EdgeInsets.all(0),
         child: Container(
-          padding: const EdgeInsets.all(16),
+          height: size.width > 750 ? 670 : null,
           decoration: BoxDecoration(
             color: const Color(0xff2D344B),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Column(
-            children: [
-              Image.asset(
-                profileProvider.isLoggedIn
-                    ? 'assets/icons/logout.png'
-                    : 'assets/icons/login.png',
-                height: 60,
-                width: 60,
-              ),
-              const SizedBox(height: 10),
-              Text(
-                profileProvider.isLoggedIn
-                    ? 'First name Last name'
-                    : 'Authorization',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min, // Adjust content dynamically
+              children: [
+                Image.asset(
+                  profileProvider.isLoggedIn ? logoutPng : loginPng,
+                  // height: screenWidth * 0.15, // 15% of screen width
+                  // width: screenWidth * 0.15,
                 ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                profileProvider.isLoggedIn
-                    ? 'Log in with Apple ID \n email@gmail.com'
-                    : 'In order to access the library of favorite packs of sounds, log in with Apple ID',
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 14, color: Colors.grey),
-              ),
-              const SizedBox(height: 10),
-              GestureDetector(
-                onTap: () {
-                  if (profileProvider.isLoggedIn) {
-                    _showLogoutBottomSheet(context, profileProvider);
-                  } else {
-                    profileProvider.toggleLoginStatus();
-                  }
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: profileProvider.isLoggedIn
-                        ? const Color(0xff2D344B) // Color when logged in
-                        : const Color(0xff141927), // Color when logged out
-                    borderRadius: BorderRadius.circular(25), // Rounded corners
+                Text(
+                  profileProvider.isLoggedIn
+                      ? 'First name Last name'
+                      : 'Authorization',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
                   ),
-                  width: 300, // Fixed width
-                  height: 50, // Fixed height
-                  alignment: Alignment.center, // Center-align content
-                  child: profileProvider.isLoggedIn
-                      ? const Text(
-                          'Logout',
-                          style: TextStyle(color: Colors.orange, fontSize: 18),
-                        )
-                      : const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(Icons.apple, color: Colors.white),
-                            SizedBox(width: 8),
-                            Text(
-                              'Login with Apple ID',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 17),
-                            ),
-                          ],
-                        ),
                 ),
-              )
-            ],
+                SizedBox(height: screenWidth * 0.01),
+                Text(
+                  profileProvider.isLoggedIn
+                      ? 'Log in with Apple ID \n email@gmail.com'
+                      : 'In order to access the library of favorite packs of sounds, log in with Apple ID',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 13, color: Colors.grey),
+                ),
+                SizedBox(height: screenWidth * 0.05),
+                GestureDetector(
+                  onTap: () {
+                    if (profileProvider.isLoggedIn) {
+                      _showLogoutBottomSheet(
+                          context, profileProvider, screenHeight);
+                    } else {
+                      profileProvider.toggleLoginStatus();
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: profileProvider.isLoggedIn
+                          ? const Color(0xff2D344B)
+                          : const Color(0xff141927),
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    width: screenWidth * 0.7, // 80% of screen width
+                    height: screenWidth * 0.12, // Proportional height
+                    alignment: Alignment.center,
+                    child: profileProvider.isLoggedIn
+                        ? const Text(
+                            'Logout',
+                            style:
+                                TextStyle(color: Colors.orange, fontSize: 17),
+                          )
+                        : const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(Icons.apple, color: Colors.white),
+                              SizedBox(width: 8),
+                              Text(
+                                'Login with Apple ID',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 17),
+                              ),
+                            ],
+                          ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -120,30 +139,28 @@ class Profile extends StatelessWidget {
   }
 
   Widget _buildOptionsSection(
-      BuildContext context, ProfileProvider profileProvider) {
-    return Expanded(
+      BuildContext context,
+      ProfileProvider profileProvider,
+      double screenWidth,
+      double screenHeight) {
+    return SizedBox(
+      height: screenHeight * 0.5, // Constrain height dynamically
       child: ListView(
+        physics: const BouncingScrollPhysics(),
         children: [
-          // Spacer before the first tile with underline
           const SizedBox(height: 10),
           const Divider(color: Color(0xFF21283F), thickness: 1),
-
-          // First ListTile
           _buildListTile(
-            'assets/icons/get_premium.png',
+            getPremiumPng,
             'Get Premium',
             Colors.orange,
             trailingColor: Colors.orange,
           ),
-
-          // Spacer after the first tile with underline
           const SizedBox(height: 20),
           const Divider(color: Color(0xFF21283F), thickness: 1),
-
-          // Next two ListTiles
           if (profileProvider.isLoggedIn)
             _buildListTile(
-              'assets/icons/favorite.png',
+              favoritestarpng,
               'Favorite',
               Colors.white,
               onTap: () {
@@ -154,31 +171,26 @@ class Profile extends StatelessWidget {
                   ),
                 );
               },
-            
             ),
-
           _buildListTile(
-            'assets/icons/privacy_policy.png',
-            'Privacy Policy',
+            privacypolicyPng,
+            'Private Policy',
             null,
           ),
-
-          // Last three ListTiles
           _buildListTile(
-            'assets/icons/licence_agreement.png',
+            licenceagreementPng,
             'License Agreement',
             null,
           ),
           const SizedBox(height: 20),
           const Divider(color: Color(0xFF21283F), thickness: 1),
           _buildListTile(
-            'assets/icons/rate_us.png',
+            rateusPng,
             'Rate Us',
             null,
           ),
-
           _buildListTile(
-            'assets/icons/send_feedback.png',
+            sendfeedbackPng,
             'Send Feedback',
             null,
           ),
@@ -210,31 +222,35 @@ class Profile extends StatelessWidget {
             style: TextStyle(
               fontFamily: 'SF',
               color: textColor ?? Colors.white,
+              fontSize: 17,
             ),
           ),
-          trailing: Icon(Icons.arrow_forward_ios,
-              color: trailingColor ?? Colors.grey),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            color: trailingColor ?? Colors.grey,
+          ),
           onTap: onTap ?? () {},
         ),
         const Divider(
-          color: Color(0xFF21283F), // Color of the underline
-          thickness: 1, // Thickness of the underline
-          height: 1, // Height between the ListTile and the divider
+          color: Color(0xFF21283F),
+          thickness: 1,
+          height: 1,
         ),
       ],
     );
   }
 
-  void _showLogoutBottomSheet(BuildContext context, ProfileProvider provider) {
+  void _showLogoutBottomSheet(
+      BuildContext context, ProfileProvider provider, double screenHeight) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xff2D344B),
+      backgroundColor: const Color.fromARGB(0, 199, 184, 184),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
       ),
       builder: (BuildContext context) {
         return Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.symmetric(vertical: screenHeight * 0.03),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -244,15 +260,32 @@ class Profile extends StatelessWidget {
                   Navigator.of(context).pop();
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff2D344B),
+                  backgroundColor: const Color(0xff141927),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  minimumSize: const Size(double.infinity, 50),
+                  minimumSize: Size(double.infinity, screenHeight * 0.15),
                 ),
-                child: const Text(
-                  'Logout',
-                  style: TextStyle(color: Colors.orange, fontSize: 20),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Are you sure you want to log out?',
+                      style: TextStyle(
+                        color: Color(0xffEBEBF5),
+                        fontSize: 13,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Divider(color: Color(0xFF21283F), thickness: 1),
+                    Text(
+                      'Logout',
+                      style: TextStyle(
+                        color: Color(0xff4870FF),
+                        fontSize: 17,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 10),
@@ -265,11 +298,14 @@ class Profile extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  minimumSize: const Size(double.infinity, 50),
+                  minimumSize: Size(double.infinity, screenHeight * 0.07),
                 ),
                 child: const Text(
                   'Cancel',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 17,
+                  ),
                 ),
               ),
             ],
