@@ -6,6 +6,7 @@ import 'package:sleep_sounds/screens/feature/discover/widgets/featured_on_list.d
 import 'package:sleep_sounds/screens/feature/discover/widgets/play_fav_button.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/favorite_provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/widgets/song_list_widget.dart';
+import 'package:sleep_sounds/utilities/images_path.dart';
 
 class ExpandedBottomContainer extends StatelessWidget {
   final String title;
@@ -26,9 +27,9 @@ class ExpandedBottomContainer extends StatelessWidget {
   });
 
   final List<String> _iconPaths = [
-    'assets/icons/discover_icon.png',
-    'assets/icons/composer_icon.png',
-    'assets/icons/profile_icon.png',
+    discoverIconPng,
+    composerIconPng,
+    profileIconPng,
   ];
 
   final List<String> _labels = ['Discover', 'Composer', 'Profile'];

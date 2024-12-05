@@ -9,6 +9,7 @@ import 'package:sleep_sounds/screens/feature/discover/widgets/bottom_container.d
 import 'package:sleep_sounds/screens/feature/discover/widgets/custom_bottom_nav_bar.dart';
 import 'package:sleep_sounds/screens/feature/discover/widgets/expanded_bottom_container.dart';
 import 'package:sleep_sounds/screens/feature/discover/widgets/mood_dream.dart';
+import 'package:sleep_sounds/utilities/images_path.dart';
 
 class PackDetail extends StatelessWidget {
   final String title;
@@ -36,9 +37,9 @@ class PackDetail extends StatelessWidget {
   });
 
   final List<String> _iconPaths = [
-    'assets/icons/discover_icon.png',
-    'assets/icons/composer_icon.png',
-    'assets/icons/profile_icon.png',
+    discoverIconPng,
+    composerIconPng,
+    profileIconPng,
   ];
 
   final List<String> _labels = ['Discover', 'Composer', 'Profile'];
@@ -109,7 +110,7 @@ class PackDetail extends StatelessWidget {
                       children: [
                         MoodDream(
                           icon: Image.asset(
-                            'assets/icons/moodicon.png',
+                            moodiIconPng,
                             scale: 0.8,
                             width: screenWidth * 0.1,
                             height: screenHeight * 0.05,
@@ -120,7 +121,7 @@ class PackDetail extends StatelessWidget {
                         SizedBox(width: screenWidth * 0.07),
                         MoodDream(
                           icon: Image.asset(
-                            'assets/icons/dreamicon.png',
+                            dreamIconPng,
                             scale: 0.8,
                             width: screenWidth * 0.1,
                             height: screenHeight * 0.05,

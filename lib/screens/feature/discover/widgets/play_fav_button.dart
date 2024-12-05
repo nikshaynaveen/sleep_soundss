@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sleep_sounds/screens/feature/discover/widgets/icon_text_button.dart';
-import 'package:provider/provider.dart';
-import 'package:sleep_sounds/screens/feature/discover/provider/mini_music_player_provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/widgets/music_player_screen.dart';
 
 class PlayFavButton extends StatelessWidget {

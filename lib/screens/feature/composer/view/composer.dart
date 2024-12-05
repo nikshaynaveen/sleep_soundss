@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sleep_sounds/screens/common_widgets/images_path.dart';
+import 'package:sleep_sounds/utilities/images_path.dart';
 import 'package:sleep_sounds/screens/feature/composer/widgets/section_widgets.dart';
 
 class Composer extends StatelessWidget {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/music_player_provider.dart';
+import 'package:sleep_sounds/utilities/images_path.dart';
 
 class MusicPlayerScreen extends StatelessWidget {
   final String title;
@@ -36,7 +37,7 @@ class MusicPlayerScreen extends StatelessWidget {
           children: [
             Center(
               child: IconButton(
-                icon: SvgPicture.asset('assets/icons/collapse_arrow_down.svg',
+                icon: SvgPicture.asset(collapseArrowSvg,
                     width: screenWidth * 0.06,
                     height: screenWidth * 0.06,
                     colorFilter: const ColorFilter.mode(

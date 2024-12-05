@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/category_provider.dart';
+import 'package:sleep_sounds/utilities/images_path.dart';
 
 class CategoryTabs extends StatelessWidget {
   final Function(String) onCategorySelected;
@@ -8,9 +9,9 @@ class CategoryTabs extends StatelessWidget {
   CategoryTabs({required this.onCategorySelected, super.key});
 
   final List<Map<String, String>> categories = [
-    {'name': 'All', 'icon': 'assets/icons/all.png'},
-    {'name': 'Ambient', 'icon': 'assets/icons/ambient.png'},
-    {'name': 'For Kids', 'icon': 'assets/icons/forkids.png'},
+    {'name': 'All', 'icon': allPng},
+    {'name': 'Ambient', 'icon': ambientPng},
+    {'name': 'For Kids', 'icon': forkidsPng},
   ];
 
   @override

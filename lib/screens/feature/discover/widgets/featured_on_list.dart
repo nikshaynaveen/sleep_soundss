@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sleep_sounds/screens/feature/discover/view/pack_detail.dart';
+import 'package:sleep_sounds/utilities/images_path.dart';
 
 class FeaturedOnList extends StatelessWidget {
   // Sample song data including provided asset images
@@ -7,7 +8,7 @@ class FeaturedOnList extends StatelessWidget {
     {
       'title': 'Summer Night',
       'subtitle': '5 Songs • Chill Vibes',
-      'image': 'assets/images/summer_night.png',
+      'image': summerNightPng,
       'category': 'Chill',
       'description':
           'Bask in the warmth of summer nights with this relaxing pack of chill hop beats and mellow melodies.',
@@ -22,7 +23,7 @@ class FeaturedOnList extends StatelessWidget {
     {
       'title': 'Awakening',
       'subtitle': '4 Songs • Morning Tunes',
-      'image': 'assets/images/awakening.png',
+      'image': awakeningPng,
       'category': 'Morning',
       'description':
           'Start your day with soothing sounds that gently awaken the senses. Perfect for a mindful morning.',
@@ -36,7 +37,7 @@ class FeaturedOnList extends StatelessWidget {
     {
       'title': 'Chill Hop',
       'subtitle': '6 Songs • Instrumental',
-      'image': 'assets/images/chill_hop.png',
+      'image': chillHopePng,
       'category': 'Chill',
       'description':
           'Enjoy laid-back beats with a touch of urban groove, perfect for study sessions or relaxing evenings.',
@@ -52,7 +53,7 @@ class FeaturedOnList extends StatelessWidget {
     {
       'title': 'Guitar Camp',
       'subtitle': '7 Songs • Instrumental',
-      'image': 'assets/images/guitar_camp.png',
+      'image': guitarCampPng,
       'category': 'For Kids',
       'description':
           'Relax with mellow guitar melodies perfect for campfire nights and peaceful escapes. Pure instrumental warmth for any moment.',
@@ -137,6 +138,7 @@ class FeaturedOnList extends StatelessWidget {
                     left: screenWidth * 0.015,
                     child: GestureDetector(
                       onTap: () {
+                        // ignore: avoid_print
                         print("Play button clicked for ${item['title']}");
                       },
                       child: Container(

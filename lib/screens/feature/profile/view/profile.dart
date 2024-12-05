@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sleep_sounds/screens/common_widgets/images_path.dart';
+import 'package:sleep_sounds/utilities/images_path.dart';
 import 'package:sleep_sounds/screens/feature/profile/view/favorite.dart';
 import 'package:sleep_sounds/screens/feature/profile/provider/profile_provider.dart';
 

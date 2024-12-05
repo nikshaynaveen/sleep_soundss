@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_sounds/screens/common_widgets/home_page.dart';
+import 'package:sleep_sounds/utilities/images_path.dart';
 import '../provider/auth_provider.dart';
 
 class LoginSlides extends StatelessWidget {
@@ -9,19 +10,19 @@ class LoginSlides extends StatelessWidget {
       'title': 'Exclusive Music',
       'description':
           'We have an author’s library of sounds that you will not find anywhere else',
-      'image': 'assets/images/slide1.png',
+      'image': slide1Png,
     },
     {
       'title': 'Relax sleep sounds',
       'description':
           'Our sounds will help to relax and improve your sleep health',
-      'image': 'assets/images/slide2.png',
+      'image': slide2Png,
     },
     {
       'title': 'Story for kids',
       'description':
           'Famous fairy tales with soothing sounds will help your children fall asleep faster',
-      'image': 'assets/images/slide3.png',
+      'image': slide3Png,
     },
   ];
 

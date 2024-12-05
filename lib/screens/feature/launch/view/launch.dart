@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sleep_sounds/screens/feature/launch/provider/launch_provider.dart';
+import 'package:sleep_sounds/utilities/images_path.dart';
 
 class LaunchScreen extends StatelessWidget {
   const LaunchScreen({super.key});
@@ -20,7 +21,7 @@ class LaunchScreen extends StatelessWidget {
           children: [
             // Image scales dynamically based on screen size
             Image.asset(
-              'assets/images/launch_icon.png',
+              launchIconPng,
               width: screenWidth * 0.4,
               height: screenHeight * 0.2,
             ),

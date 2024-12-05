@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:sleep_sounds/screens/feature/composer/view/composer.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/mini_music_player_provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/widgets/music_player_screen.dart';
@@ -9,6 +8,7 @@ import 'package:sleep_sounds/screens/feature/discover/view/discover.dart';
 import 'package:sleep_sounds/screens/feature/discover/provider/navigation_provider.dart';
 import 'package:sleep_sounds/screens/feature/discover/widgets/custom_bottom_nav_bar.dart';
 import 'package:sleep_sounds/screens/feature/discover/widgets/mini_music_player.dart';
+import 'package:sleep_sounds/utilities/images_path.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -20,9 +20,9 @@ class HomePage extends StatelessWidget {
   ];
 
   final List<String> _iconPaths = [
-    'assets/icons/discover_icon.png',
-    'assets/icons/composer_icon.png',
-    'assets/icons/profile_icon.png',
+    discoverIconPng,
+    composerIconPng,
+    profileIconPng,
   ];
 
   final List<String> _labels = ['Discover', 'Composer', 'Profile'];
@@ -37,6 +37,7 @@ class HomePage extends StatelessWidget {
       body: Stack(
         children: [
           // Current page content
+          // ignore: deprecated_member_use
           WillPopScope(
             onWillPop: () async {
               // If we are on Composer or Profile page, return false to prevent exit

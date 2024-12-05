@@ -1,10 +1,12 @@
+import 'package:sleep_sounds/utilities/images_path.dart';
+
 final List<Map<String, dynamic>> musicItems = [
   {
     'title': 'Awakening Vibes',
     'no of songs': '3 Songs',
     'category': 'Ambient',
-    'grid thumbnail': 'assets/images/awakening.png',
-    'pack bg image': 'assets/images/packdetailbg.png',
+    'grid thumbnail': awakeningPng,
+    'pack bg image': packdetailbgPng,
     'mood': 'Peaceful',
     'dreams': 'Morning Calm',
     'description':
@@ -31,8 +33,8 @@ final List<Map<String, dynamic>> musicItems = [
     'title': 'Chill Hop Beats',
     'no of songs': '2 Songs',
     'category': 'For Kids',
-    'grid thumbnail': 'assets/images/chill_hop.png',
-    'pack bg image': 'assets/images/packdetailbg2.png',
+    'grid thumbnail': chillHopePng,
+    'pack bg image': packdetailbg2Png,
     'mood': 'Playful',
     'dreams': 'Afternoon Adventures',
     'description':
@@ -59,8 +61,8 @@ final List<Map<String, dynamic>> musicItems = [
     'title': 'Guitar Campfire',
     'no of songs': '2 Songs',
     'category': 'Ambient',
-    'grid thumbnail': 'assets/images/guitar_camp.png',
-    'pack bg image': 'assets/images/packdetailbg3.png',
+    'grid thumbnail': guitarCampPng,
+    'pack bg image': packdetailbg3Png,
     'mood': 'Lighthearted',
     'dreams': 'Daydreams',
     'description':
@@ -82,8 +84,8 @@ final List<Map<String, dynamic>> musicItems = [
     'title': 'Guitar at Home',
     'no of songs': '2 Songs',
     'category': 'For Kids',
-    'grid thumbnail': 'assets/images/guitar_home.png',
-    'pack bg image': 'assets/images/packdetailbg4.png',
+    'grid thumbnail': guitarHomePng,
+    'pack bg image': packdetailbg4Png,
     'mood': 'Relaxed',
     'dreams': 'Home Comforts',
     'description':
@@ -105,8 +107,8 @@ final List<Map<String, dynamic>> musicItems = [
     'title': 'Summer Night Chill',
     'no of songs': '2 Songs',
     'category': 'Ambient',
-    'grid thumbnail': 'assets/images/summer_night.png',
-    'pack bg image': 'assets/images/packdetailbg5.png',
+    'grid thumbnail': summerNightPng,
+    'pack bg image': packdetailbg5Png,
     'mood': 'Calm',
     'dreams': 'Warm Evenings',
     'description':
@@ -128,8 +130,8 @@ final List<Map<String, dynamic>> musicItems = [
     'title': 'Winter Night',
     'no of songs': '2 Songs',
     'category': 'For Kids',
-    'grid thumbnail': 'assets/images/winter_night.png',
-    'pack bg image': 'assets/images/packdetailbg6.png',
+    'grid thumbnail': winterNightPng,
+    'pack bg image': packdetailbg6Png,
     'mood': 'Serene',
     'dreams': 'Winter Dreams',
     'description':

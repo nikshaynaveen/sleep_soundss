@@ -1,4 +1,5 @@
 //icons
+
 const logoutPng = 'assets/icons/logout.png';
 const loginPng = 'assets/icons/login.png';
 const getPremiumPng = 'assets/icons/get_premium.png';
@@ -22,12 +23,15 @@ const instrumentalPng = 'assets/icons/instrumental.png';
 const forkidsPng = 'assets/icons/forkids.png';
 const ambientPng = 'assets/icons/ambient.png';
 const allPng = 'assets/icons/all.png';
+const discoverIconPng = 'assets/icons/discover_icon.png';
+const composerIconPng = 'assets/icons/composer_icon.png';
+const collapseArrowSvg = 'assets/icons/collapse_arrow_down.svg';
 
 //images
 
 const favoritePng = 'assets/images/Favorite.png';
 const summerNightPng = 'assets/images/summer_night.png';
-const winderNightPng = 'assets/images/winter_night.png';
+const winterNightPng = 'assets/images/winter_night.png';
 const slide3Png = 'assets/images/slide3.png';
 const slide2Png = 'assets/images/slide2.png';
 const slide1Png = 'assets/images/slide1.png';
@@ -41,5 +45,5 @@ const launchIconPng = 'assets/images/launch_icon.png';
 const guitarHomePng = 'assets/images/guitar_home.png';
 const guitarCampPng = 'assets/images/guitar_camp.png';
 const defaultImagePng = 'assets/images/default_image.png';
-const chillyHopePng = 'assets/images/chill_hop.png';
+const chillHopePng = 'assets/images/chill_hop.png';
 const awakeningPng = 'assets/images/awakening.png';
